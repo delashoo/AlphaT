@@ -4,17 +4,19 @@ pragma solidity ^0.8.18;
 //IMPORTS
 import "./priceconverter.sol";
 
+error NotOwner();
+
 contract Fund {
     using priceconverter for uint256;
 
-    address public owner;
+    address public immutable i_owner; //gas efficiency
 
     constructor() {
-        owner = msg.sender;
+        i_owner = msg.sender;
     }
     
     //Set minimum funding amount
-    uint256 public MIN_USD = 25 * 1e18;
+    uint256 public constant MIN_USD = 25 * 1e18;
 
     //Array of addresses of funders
     address[] public funders;
@@ -23,7 +25,8 @@ contract Fund {
     mapping (address => uint256) AddressToAmount;
 
     modifier onlyOwner {
-        require(msg.sender == owner, "Sender is not owner!");
+        //require(msg.sender == owner, "Sender is not owner!");
+        if(msg.sender != i_owner) {revert NotOwner();}
         _;
     }
 
@@ -65,4 +68,7 @@ contract Fund {
         (bool callSucces,) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSucces, "call failed");
     }
+
+    //receive & fallback
+    
 }
