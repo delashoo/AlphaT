@@ -11,8 +11,11 @@ contract Fund {
 
     address public immutable i_owner; //gas efficiency
 
-    constructor() {
+    AggregatorV3Interface public priceFeed;
+
+    constructor(address priceFeedAddress) {
         i_owner = msg.sender;
+        priceFeed = AggregatorV3Interface(priceFeedAddress);
     }
     
     //Set minimum funding amount
@@ -31,7 +34,7 @@ contract Fund {
     }
 
     function fund() public payable { 
-        require(msg.value.getConversionRate() >= MIN_USD, "Didn't send enough!"); //REVERTING
+        require(msg.value.getConversionRate(priceFeed) >= MIN_USD, "Didn't send enough!"); //REVERTING
         funders.push(msg.sender);
         AddressToAmount[msg.sender] += msg.value;
     }
