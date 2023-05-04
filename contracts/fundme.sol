@@ -70,5 +70,11 @@ contract Fund {
     }
 
     //receive & fallback
-    
+    receive() external payable {
+        fund();
+    }
+
+    fallback() external payable {
+        fund();
+    }
 }
