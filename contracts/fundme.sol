@@ -6,7 +6,7 @@ import "./priceconverter.sol";
 
 error NotOwner();
 
-contract Fund {
+contract FundMe {
     using priceconverter for uint256;
 
     address public immutable i_owner; //gas efficiency
