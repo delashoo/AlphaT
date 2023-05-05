@@ -6,7 +6,7 @@ import "./priceconverter.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 //ERRORCODES
-error FUndMe__NotOwner();
+error FundMe__NotOwner();
 
 //Interfacess && Libraries >> Contracts
 
@@ -43,7 +43,16 @@ contract FundMe {
         _;
     }
 
-    //FUNCTIONS
+    /**Functions  Order
+     * constructor
+     * receive
+     * fallback
+     * external
+     * public
+     * internal
+     * private
+     * view/pure
+     */
     constructor(address priceFeedAddress) {
         i_owner = msg.sender;
         priceFeed = AggregatorV3Interface(priceFeedAddress);
@@ -58,6 +67,9 @@ contract FundMe {
         fund();
     }
 
+    /**
+     * @notice This function funds the contract
+     */
     function fund() public payable {
         require(
             msg.value.getConversionRate(priceFeed) >= MIN_USD,
@@ -97,13 +109,4 @@ contract FundMe {
     }    
 }
 
-/**
-     *Blockchain oracle - Any device that provides blockchains with external data & computation
-     * Chainlink - a modular decentralized oracle network to bring data & external computation.
-     can be completely customized to bring in any type of data/computation to blockchain network.
-     * Services include; 
-            1. DAtafeeds
-            2. Verifiable Random function
-            3. Chainlink Keepers - nodes that listen to specific events to perform actions.
-            4. End-to-end reliability for smart contracts. - 
-     */
+
