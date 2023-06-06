@@ -1,11 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
 require('hardhat-deploy');
 require("dotenv").config()
-require("@nomiclabs/hardhat-etherscan")
-require("@nomiclabs/hardhat-waffle")
-require("hardhat-gas-reporter")
-require("solidity-coverage")
-
+require("@nomicfoundation/hardhat-toolbox")
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
 const PRIVATE_KEY = process.env.PRIVATE_KEY

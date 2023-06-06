@@ -20,7 +20,6 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
     "@nomiclabs/hardhat-ether": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
-    "ethers": "^5.7.2",
     "hardhat": "^2.14.0",
     "hardhat-deploy": "^0.11.26"
   },
